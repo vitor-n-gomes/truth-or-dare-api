@@ -11,7 +11,8 @@ export default class extends BaseSchema {
       table.string('password');
       table.boolean('status').defaultTo(true);
       table.boolean('force_password_reset').defaultTo(false);
-      table.string('reset_password_token', 255).nullable().defaultTo(null); // Use VARCHAR(255) for MySQL
+      table.string('reset_password_token', 255).nullable().defaultTo(null); 
+      table.string('remember_me_token', 255).nullable().defaultTo(null); 
 
       table.timestamp('created_at', { useTz: true });
       table.timestamp('updated_at', { useTz: true });

@@ -24,3 +24,10 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.post('/login', 'AuthController.login')
 
 Route.post('/register', 'AuthController.register')
+
+
+Route.group(() => {
+  
+  Route.resource('category', 'CategoryController')
+
+}).prefix('admin').middleware('auth');

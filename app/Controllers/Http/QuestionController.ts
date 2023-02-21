@@ -3,12 +3,13 @@ import Question from 'App/Models/Question'
 import QuestionValidator from 'App/Validators/QuestionValidator'
 
 export default class QuestionController {
-  public async index({ auth }: HttpContextContract) {
-    
-    const user = await auth.authenticate()
-    
-    const questions = await user.related('question').query()
 
+  public async index({ response }: HttpContextContract) {
+    
+    const questions = await Question.query().orderBy('id', 'desc');
+
+    response.status(200); 
+    
     return questions
   }
 

@@ -53,6 +53,8 @@ export default class CategoryController {
 
     const category = await Category.findOrFail(params.id)
 
+    await category.related('question').detach()
+
     await category.delete()
 
     return response.status(204)

@@ -37,7 +37,7 @@ export default class User extends BaseModel {
   @hasMany(() => Question, {
     foreignKey: 'userId', 
   })
-  public questions: HasMany<typeof Question>
+  public question: HasMany<typeof Question>
 
   @hasMany(() => Category, {
     foreignKey: 'userId', 

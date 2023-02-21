@@ -29,5 +29,6 @@ Route.post('/register', 'AuthController.register')
 Route.group(() => {
   
   Route.resource('category', 'CategoryController')
+  Route.resource('question', 'QuestionController')
 
 }).prefix('admin').middleware('auth');

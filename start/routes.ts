@@ -20,14 +20,25 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+import LiteralNamingStrategy from 'App/Models/ColumnStrategy/LiteralStrategy'
+import { BaseModel } from '@ioc:Adonis/Lucid/Orm'
+
+BaseModel.namingStrategy = new LiteralNamingStrategy();
 
 Route.post('/login', 'AuthController.login')
 
 Route.post('/register', 'AuthController.register')
 
+Route.group(() => {
+
+  Route.get('truth/:category', 'TruthOrDareController.truthQuestion')
+  Route.get('dare/:category', 'TruthOrDareController.dareQuestion')
+
+}).prefix('question')
+
 
 Route.group(() => {
-  
+
   Route.resource('category', 'CategoryController')
   Route.resource('question', 'QuestionController')
 

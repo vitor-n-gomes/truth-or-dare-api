@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Question from 'App/Models/Question'
 import QuestionValidator from 'App/Validators/QuestionValidator'
+import Question from 'App/Models/Question'
 
 export default class QuestionController {
 
@@ -9,7 +9,7 @@ export default class QuestionController {
     const questions = await Question.query().orderBy('id', 'desc');
 
     response.status(200); 
-    
+
     return questions
   }
 

@@ -1,16 +1,17 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Category from 'App/Models/Category'
-
 import CategoryValidator from 'App/Validators/CategoryValidator'
 import CategoryException from 'App/Exceptions/CategoryException'
 
+import Category from 'App/Models/Category'
 
 export default class CategoryController {
 
-  public async index() {
+  public async index({ response }: HttpContextContract) {
 
     const categories = await Category.query().orderBy('id', 'desc');
+
+    response.status(200);
 
     return categories
   }

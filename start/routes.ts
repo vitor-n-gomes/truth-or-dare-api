@@ -25,9 +25,13 @@ import { BaseModel } from '@ioc:Adonis/Lucid/Orm'
 
 BaseModel.namingStrategy = new LiteralNamingStrategy();
 
+Route.get('/', 'CategoryController.index')
+
 Route.post('/login', 'AuthController.login')
 
 Route.post('/register', 'AuthController.register')
+
+Route.delete('/logout', 'AuthController.destroy')
 
 Route.group(() => {
 

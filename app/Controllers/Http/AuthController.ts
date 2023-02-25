@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
-import UserNotFoundException from 'App/Exceptions/UserNotFoundException'
+import BadRequestException from 'App/Exceptions/BadRequestException'
 
 import User from 'App/Models/User'
 
@@ -50,7 +50,7 @@ export default class AuthController {
         const user = await User.findBy('email', email);
 
         if (!user) {
-            throw new UserNotFoundException('User not found', 404);
+            throw new BadRequestException('User not found', 409)
         }
 
         const token = await auth.use('api').attempt(email, password, {
@@ -60,4 +60,9 @@ export default class AuthController {
         return response.json({ token, user })
 
     }
+
+    public async destroy({ response, auth }: HttpContextContract) {
+        await auth.logout()
+        return response.ok({})
+      }
 }

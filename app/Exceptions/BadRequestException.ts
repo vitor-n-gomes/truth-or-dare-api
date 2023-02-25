@@ -9,18 +9,15 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 | a status code and error code for every exception.
 |
 | @example
-| new UserNotFoundException('message', 500, 'E_RUNTIME_EXCEPTION')
+| new BadRequestException('message', 500, 'E_RUNTIME_EXCEPTION')
 |
 */
-export default class UserNotFoundException extends Exception {
+export default class BadRequestException extends Exception {
+    public code = 'BAD_REQUEST'
+
     public async handle(error: this, ctx: HttpContextContract) {
-
-        let errors:any[] = [
-            {
-                message: error.message
-            }
-        ]
-
-        ctx.response.status(error.status).send({errors: errors})
-      }
+        return ctx.response
+            .status(error.status)
+            .send({ code: error.code, message: error.message, status: error.status })
+    }
 }

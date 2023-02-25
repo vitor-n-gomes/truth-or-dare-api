@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import CategoryValidator from 'App/Validators/CategoryValidator'
-import CategoryException from 'App/Exceptions/CategoryException'
 
 import Category from 'App/Models/Category'
+import BadRequestException from 'App/Exceptions/BadRequestException';
 
 export default class CategoryController {
 
@@ -62,7 +62,7 @@ export default class CategoryController {
     const questionsCount = await category.related('question').query()
 
     if (questionsCount.length > 0) {
-      throw new CategoryException('This category has questions attached and cannot be deleted.', 400);
+      throw new BadRequestException('This category has questions attached and cannot be deleted.', 409)
     }
 
     await category.delete()

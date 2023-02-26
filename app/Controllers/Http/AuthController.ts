@@ -50,14 +50,14 @@ export default class AuthController {
         const user = await User.findBy('email', email);
 
         if (!user) {
-            throw new BadRequestException('User not found', 409)
+            throw new BadRequestException('User not found', 409, 'BAD_REQUEST')
         }
 
         const token = await auth.use('api').attempt(email, password, {
             expiresIn: '7 days'
         })
 
-        return response.json({ token, user })
+        return response.status(201).json({ token, user })
 
     }
 

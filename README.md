@@ -1,7 +1,5 @@
 Hey, this is the Truth or Dare API. The goal of this project is to test conceptual strategies in web development.
 
-In the future, this code will have many features, such as socket.io, and other items.
-
 To run this project, you need to have the following specifications:
 
 *   Docker
